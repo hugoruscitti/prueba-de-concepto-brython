@@ -8,9 +8,9 @@
 
 <body>
 
-	<button onclick='ejecuta_codigo(); return false'>Convertir a JS y ejecutar</button>
+	<button onclick='ejecutar_codigo(); return false'>Convertir a JS y ejecutar</button>
 	<p>
-	<textarea rows='10' cols='60'>
+	<textarea id='editor' rows='10' cols='60'>
 class NuevoActor(pilas.actores.Actor):
 		
 	def agrandar(self):
@@ -30,9 +30,40 @@ class NuevoActor(pilas.actores.Actor):
   <script src='libs/uuid.js'></script>
 
   <script src='pilasweb.js'></script>
+		
+  <script src='brython.js'></script>
+		
 	
 	
 	
+<!-- inyeccion de brython -->
+<script type="text/python">
+def eval_python(text):
+	exec(text)
+</script>
+		
+<script>
+brython();
+	
+// Al ejecuta brython la biblioteca busca los tags script
+// marcados con "text/python" y los evalua.
+	
+// y como ese bloque de mas arriba define una funcion, esa
+// funcion se va a poder invocar desde javascript como una
+// función global.
+</script>
+	
+<script>
+	
+function ejecutar_codigo() {
+	var editor = document.getElementById('editor');
+	var codigo = editor.value;
+	
+	eval_python(codigo);
+}
+	
+	
+</script>
 	
 
 
