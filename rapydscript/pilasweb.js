@@ -46,6 +46,9 @@ var Actores = (function () {
 })();
 var Estudiante = (function () {
     function Estudiante() {
+        if (!(this instanceof Estudiante))
+            return new Estudiante();
+
         this.habilidades = [];
         this.comportamientos = [];
     }
@@ -165,6 +168,9 @@ var Actor = (function (_super) {
     __extends(Actor, _super);
     function Actor(imagen, x, y, atributos) {
         if (typeof atributos === "undefined") { atributos = {}; }
+        if (!(this instanceof Actor))
+            return new Actor(imagen, x, y, atributos);
+
         _super.call(this);
         this.imagen = imagen || 'sin_imagen.png';
         atributos = atributos || {};
@@ -172,9 +178,11 @@ var Actor = (function (_super) {
         this.radio_de_colision = 10;
         this.id = pilas.utils.obtener_uuid();
 
-        if (this === pilas.actores)
-            throw Error("Lo siento, tienes que anteponer 'new' para crear actores en esta versión.");
-
+        /* Se ejecuta si el usuario intenta llamar al constructor sin usar 'new'
+        
+        Por ejemplo, si escribe "pilas.actores.Nave()" da un error. Si el usuario
+        escribe "new pilas.actores.Nave()" sale bien :)
+        */
         this.crear_sprite();
         this.x = x || 0;
         this.y = y || 0;
@@ -545,6 +553,9 @@ else
 var Aceituna = (function (_super) {
     __extends(Aceituna, _super);
     function Aceituna(x, y) {
+        if (!(this instanceof Aceituna))
+            return new Aceituna(x, y);
+
         this.cuadro_normal = 'aceituna.png';
         this.cuadro_reir = 'aceituna_risa.png';
         this.cuadro_burlar = 'aceituna_burla.png';
@@ -580,6 +591,9 @@ var Aceituna = (function (_super) {
 var Bloque = (function (_super) {
     __extends(Bloque, _super);
     function Bloque(x, y, nombre_imagen) {
+        if (!(this instanceof Bloque))
+            return new Bloque(x, y, nombre_imagen);
+
         var imagen = nombre_imagen || "bloque.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 13;
@@ -592,6 +606,9 @@ var Bloque = (function (_super) {
 var Bomba = (function (_super) {
     __extends(Bomba, _super);
     function Bomba(x, y) {
+        if (!(this instanceof Bomba))
+            return new Bomba(x, y);
+
         var imagen = pilas.imagenes.cargar_grilla("bomba.png", 2);
         _super.call(this, imagen, x, y);
         this.centro_x = 36;
@@ -611,6 +628,9 @@ var Boton = (function (_super) {
         if (typeof ruta_normal === "undefined") { ruta_normal = 'boton/boton_normal.png'; }
         if (typeof ruta_press === "undefined") { ruta_press = 'boton/boton_press.png'; }
         if (typeof ruta_over === "undefined") { ruta_over = 'boton/boton_over.png'; }
+        if (!(this instanceof Boton))
+            return new Boton(x, y, ruta_normal, ruta_press, ruta_over);
+
         this.ruta_normal = ruta_normal;
         this.ruta_press = ruta_press;
         this.ruta_over = ruta_over;
@@ -770,6 +790,9 @@ var Boton = (function (_super) {
 var Caja = (function (_super) {
     __extends(Caja, _super);
     function Caja(x, y) {
+        if (!(this instanceof Caja))
+            return new Caja(x, y);
+
         var imagen = "caja.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 24;
@@ -786,6 +809,9 @@ var Cesto = (function (_super) {
     function Cesto(x, y) {
         if (typeof x === "undefined") { x = 120; }
         if (typeof y === "undefined") { y = 0; }
+        if (!(this instanceof Cesto))
+            return new Cesto(x, y);
+
         var ancho = 40;
         var imagen = "cesto.png";
         _super.call(this, imagen, x, y);
@@ -805,6 +831,9 @@ var Cesto = (function (_super) {
 var Cofre = (function (_super) {
     __extends(Cofre, _super);
     function Cofre(x, y) {
+        if (!(this instanceof Cofre))
+            return new Cofre(x, y);
+
         var imagen = pilas.imagenes.cargar_grilla("cofre.png", 4);
         _super.call(this, imagen, x, y);
         this.centro_x = 10;
@@ -834,6 +863,9 @@ var Cofre = (function (_super) {
 var Eje = (function (_super) {
     __extends(Eje, _super);
     function Eje(x, y) {
+        if (!(this instanceof Eje))
+            return new Eje(x, y);
+
         var imagen = "ejes.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 256;
@@ -845,6 +877,9 @@ var Eje = (function (_super) {
 var Explosion = (function (_super) {
     __extends(Explosion, _super);
     function Explosion(x, y) {
+        if (!(this instanceof Explosion))
+            return new Explosion(x, y);
+
         var imagen = pilas.imagenes.cargar_grilla("explosion.png", 7);
         _super.call(this, imagen, x, y);
         this.centro_x = 16;
@@ -866,6 +901,9 @@ var Explosion = (function (_super) {
 var Globo = (function (_super) {
     __extends(Globo, _super);
     function Globo(x, y, mensaje) {
+        if (!(this instanceof Globo))
+            return new Globo(x, y, mensaje);
+
         var imagen = "globo.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 85;
@@ -885,6 +923,9 @@ var Globo = (function (_super) {
 var Llave = (function (_super) {
     __extends(Llave, _super);
     function Llave(x, y) {
+        if (!(this instanceof Llave))
+            return new Llave(x, y);
+
         var imagen = "llave.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 9;
@@ -897,6 +938,9 @@ var Llave = (function (_super) {
 var Manzana = (function (_super) {
     __extends(Manzana, _super);
     function Manzana(x, y) {
+        if (!(this instanceof Manzana))
+            return new Manzana(x, y);
+
         var imagen = "manzana_chica.png";
         _super.call(this, imagen, x, y);
         this.radio_de_colision = 11;
@@ -908,6 +952,9 @@ var Manzana = (function (_super) {
 var Maton = (function (_super) {
     __extends(Maton, _super);
     function Maton(x, y) {
+        if (!(this instanceof Maton))
+            return new Maton(x, y);
+
         var imagen = pilas.imagenes.cargar_grilla("rpg/maton.png", 3 * 4, 1);
         _super.call(this, imagen, x, y);
         this.centro_x = 36;
@@ -1035,6 +1082,9 @@ var Maton = (function (_super) {
 var Nave = (function (_super) {
     __extends(Nave, _super);
     function Nave(x, y) {
+        if (!(this instanceof Nave))
+            return new Nave(x, y);
+
         var imagen = pilas.imagenes.cargar_grilla("nave.png", 2);
         _super.call(this, imagen, x, y);
         this.centro_x = 23;
@@ -1095,6 +1145,9 @@ var Nave = (function (_super) {
 var Pelota = (function (_super) {
     __extends(Pelota, _super);
     function Pelota(x, y) {
+        if (!(this instanceof Pelota))
+            return new Pelota(x, y);
+
         var imagen = "pelota.png";
         _super.call(this, imagen, x, y);
         this.centro_x = 25;
@@ -1123,6 +1176,9 @@ var Pelota = (function (_super) {
 var Piedra = (function (_super) {
     __extends(Piedra, _super);
     function Piedra(x, y, tamano, dx, dy) {
+        if (!(this instanceof Piedra))
+            return new Piedra(x, y, tamano, dx, dy);
+
         this.dx = dx || 0;
         this.dy = dy || 0;
 
@@ -1207,6 +1263,9 @@ var Piedra = (function (_super) {
 var Proyectil = (function (_super) {
     __extends(Proyectil, _super);
     function Proyectil(x, y, atributos) {
+        if (!(this instanceof Proyectil))
+            return new Proyectil(x, y, atributos);
+
         var imagen = pilas.imagenes.cargar_grilla("disparos/misil.png", 3);
         atributos['centro_x'] = 20;
         atributos['centro_y'] = 8;
@@ -1238,6 +1297,9 @@ var Proyectil = (function (_super) {
 var Texto = (function (_super) {
     __extends(Texto, _super);
     function Texto(x, y, texto, color) {
+        if (!(this instanceof Texto))
+            return new Texto(x, y, texto, color);
+
         var imagen = "invisible.png";
         _super.call(this, imagen, x, y);
         this.texto = texto || "Sin texto";
@@ -1323,6 +1385,9 @@ else
 var Puntaje = (function (_super) {
     __extends(Puntaje, _super);
     function Puntaje(x, y, puntaje, color) {
+        if (!(this instanceof Puntaje))
+            return new Puntaje(x, y, puntaje, color);
+
         this.valor = puntaje || 0;
         _super.call(this, x, y, this.valor.toString(), color);
     }
@@ -1350,6 +1415,9 @@ var Puntaje = (function (_super) {
 var Zanahoria = (function (_super) {
     __extends(Zanahoria, _super);
     function Zanahoria(x, y) {
+        if (!(this instanceof Zanahoria))
+            return new Zanahoria(x, y);
+
         this.cuadro_normal = "zanahoria_normal.png";
         this.cuadro_sonrie = "zanahoria_sonrie.png";
         _super.call(this, this.cuadro_normal, x, y);

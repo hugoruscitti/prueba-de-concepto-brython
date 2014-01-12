@@ -14,7 +14,11 @@
 			display: inline-block;
 			height: 400px;
 			overflow: scroll;
-			width: 40%;
+			width: 48%;
+		}
+		
+		textarea {
+			width: 90%;
 		}
 		
 		.codigo_js {
@@ -37,16 +41,16 @@
 	<textarea id='editor' rows='10' cols='60'>
 pilas.reiniciar()
 fondo = new pilas.fondos.Tarde()
-superclase = pilas.actores.Aceituna
 
-class UnActor(superclase):
+		
+class UnActor(pilas.actores.Aceituna):
 	def __init__(self):
 		this.rotacion = [30]
 		
 	def saludar(self):
 		self.decir("Hola!!! ¿hice click?")
 		
-a = new UnActor();
+a = UnActor();
 a.escala= [2]
 		
 def mostrar_mensaje(evento):
@@ -111,12 +115,20 @@ a.cuando_hace_click = mostrar_mensaje
       };
 	
 	
+			function reescribir_superclases(codigo_python) {
+				console.log("epa!");
+				return codigo_python;
+			}
+	
+	
+	
 			function convertir_codigo(codigo_python, success_callback, error_callback) {
 				
         output = OutputStream(output_opts)
         codigo_python += '\n';
 				
         try {
+					codigo_python = reescribir_superclases(codigo_python);
           TOPLEVEL = parse(codigo_python, rs_options);
           TOPLEVEL.print(output);
 					
