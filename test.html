@@ -11,7 +11,8 @@
 	<button onclick='ejecutar_codigo(); return false'>Convertir a JS y ejecutar</button>
 	<p>
 	<textarea id='editor' rows='10' cols='60'>
-class NuevoActor(pilas.actores.Actor):
+Actor = pilas.actores.Actor
+class NuevoActor(Actor):
 		
 	def agrandar(self):
 		self.escala = [3]
@@ -32,16 +33,20 @@ class NuevoActor(pilas.actores.Actor):
   <script src='pilasweb.js'></script>
 		
   <script src='brython.js'></script>
+  <script src='libs/javascript.js'></script>
 		
 	
 	
 	
-<!-- inyeccion de brython -->
+	
+	
+<!-- inyeccion de brython
 <script type="text/python">
 def eval_python(text):
 	exec(text)
 </script>
-		
+-->
+
 <script>
 brython();
 	
@@ -58,17 +63,18 @@ brython();
 function ejecutar_codigo() {
 	var editor = document.getElementById('editor');
 	var codigo = editor.value;
+
 	
-	eval_python(codigo);
+	var codigo_convertido_a_js = __BRYTHON__.py2js(codigo).to_js();
+	eval(codigo_convertido_a_js);	
+	//eval_python(codigo);
 }
-	
-	
+		
 </script>
 	
 
 
   <script>
-    window['canvas'] = canvas;
     pilas = new Pilas();
     pilas.iniciar({ancho: 320, alto: 240, data_path: 'data'});
     pilas.onready = function() {
@@ -100,6 +106,19 @@ function ejecutar_codigo() {
     }
 
     pilas.ejecutar();
+		
   </script>
+		
+		
+		
+<script>
+// parche para que los objetos de pilasweb puedan ser llamados por brython.
+pilas.__getattr__ = function() {return pilas.actores};
+pilas.actores.__getattr__ = function() {return pilas.actores.Aceituna};
+</script>
+		
+		
+		
+		
 </body>
 </html>
