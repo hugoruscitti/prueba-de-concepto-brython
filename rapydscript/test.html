@@ -115,9 +115,26 @@ a.cuando_hace_click = mostrar_mensaje
       };
 	
 	
+			/**
+			 * Repara el codigo obtenido en python para que no use submodulos
+			 * en las superclases.
+			 *
+			 * Esta función reemplaza código cómo:
+			 *
+			 *       class MiActor(pilas.actores.Actor):
+			 *
+			 *  por:
+			 *
+			 *       __super = pilas.actores.Actor
+			 *       class MiActor(__super):
+			 *
+			 * El resultado al final es el mismo, pero evita el error de
+			 * sintaxis que emite rapydscript.
+			 */
 			function reescribir_superclases(codigo_python) {
-				console.log("epa!");
-				return codigo_python;
+				var expresion = /class\s+(\w+)\((.+)\):/g
+				
+				return codigo_python.replace(expresion, "__super=$2\nclass $1(__super):")
 			}
 	
 	
